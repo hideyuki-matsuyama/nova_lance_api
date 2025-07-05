@@ -1,0 +1,24 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV["RAILS_MAX_THREADS"] || 5 %>
+  host: <%= ENV["DATABASE_HOST"] || "localhost" %>
+  username: <%= ENV["DATABASE_USER"] || 'postgres' %>
+  password: <%= ENV["DATABASE_PASSWORD"] || 'password' %>
+  port: <%= ENV["DATABASE_PORT"] || 5432 %>
+
+development:
+  <<: *default
+  database: nova_lance_development
+
+test:
+  <<: *default
+  database: nova_lance_test
+
+production:
+  <<: *default
+  database: <%= ENV["DATABASE_NAME"] %>
+  username: <%= ENV["DATABASE_USER"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
+  host: <%= ENV["DATABASE_HOST"] %>
+  port: <%= ENV["DATABASE_PORT"] %>

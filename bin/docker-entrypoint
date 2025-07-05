@@ -1,0 +1,41 @@
+#!/bin/bash -e
+
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+echo "Running entrypoint as: $(whoami)"
+
+# Fix Docker socket permissions (running as root)
+if [ -S /var/run/docker.sock ]; then
+  echo "Fixing Docker socket permissions..."
+  DOCKER_GID=$(stat -c %g /var/run/docker.sock)
+  echo "Docker socket GID: $DOCKER_GID"
+
+  # Change group ownership and permissions
+  chgrp docker /var/run/docker.sock
+  chmod 664 /var/run/docker.sock
+
+  echo "Docker socket setup completed"
+  ls -la /var/run/docker.sock
+fi
+
+# Ensure rails user owns necessary directories
+for dir in log tmp storage; do
+  if [ -d "/rails_api/$dir" ]; then
+    chown -R rails:rails "/rails_api/$dir"
+  fi
+done
+
+echo "⛏ Running: rails db:prepare as rails user..."
+su rails -c "cd /rails_api && bundle exec rails db:prepare"
+
+echo "=== DEBUG: switching to rails user ==="
+echo "Current user: $(whoami)"
+
+# Execute the command as rails user
+if [ $# -eq 0 ]; then
+  echo "No arguments received, starting bash shell as rails user"
+  exec su rails -c "cd /rails_api && bash"
+else
+  echo "Executing command as rails user: $*"
+  exec su rails -c "cd /rails_api && $*"
+fi

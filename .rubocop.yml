@@ -1,0 +1,37 @@
+AllCops:
+  TargetRubyVersion: 3.4
+  NewCops: enable
+  Exclude:
+    - 'vendor/**/*'
+    - 'tmp/**/*'
+    - 'bin/**/*'
+    - 'db/schema.rb'
+    - 'db/cable_schema.rb'
+    - 'db/cache_schema.rb'
+    - 'db/queue_schema.rb'
+    - 'node_modules/**/*'
+
+plugins:
+  - rubocop-rails
+  - rubocop-performance
+  - rubocop-rspec
+  - rubocop-factory_bot
+  - rubocop-rspec_rails
+
+Security:
+  Enabled: true
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - 'config/**/*'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'db/migrate/*'
