@@ -6,11 +6,12 @@
 
 # 🚧WIP
 
+* 仮想プロダクトの Rails API アプリケーションです
 * テスト実行時に C0 カバレッジを計測しています
   - `Test` workflow の実行結果にある `Artifacts` からダウンロードして参照できます
 * VSCode の拡張機能 `GitHub Local Actions` が動作します
   - これにより git push することなく手元でワークフローが実行可能です
   - 当該拡張機能においては、その制約により`Artifacts` が作成されません
 * Postman の collection.json は conflict が激しくなるため Insomnia を採用しましたが、以下の理由により再検討が必要です
-  - Insomnia 現行バージョンのエクスポート形式（v5/HAR）が inso CLI 非対応
-  - そのため GitHub Actions で自動テストに使えない
+  - Insomnia 現行バージョンのエクスポート形式（v5/HAR）が inso CLI 非対応となっております
+  - そのため GitHub Actions で自動テストに使えない状態です
