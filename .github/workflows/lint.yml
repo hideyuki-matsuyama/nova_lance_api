@@ -1,0 +1,24 @@
+name: Lint
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  lint_api:
+    name: Lint API (RuboCop)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          # Ruby 3.4.x + Bundler 2.6.7 の組み合わせでCIエラーが発生するため、安定動作のために3.3.0を指定
+          ruby-version: "3.3.0"
+          bundler-cache: true
+
+      - name: Lint code for consistent style
+        run: bundle exec rubocop -f github

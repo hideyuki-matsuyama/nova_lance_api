@@ -1,0 +1,26 @@
+name: Security
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  scan_api_security:
+    name: Scan API for security (Brakeman)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4.4"
+          bundler-cache: true
+
+      - name: Reinstall Bundler
+        run: gem uninstall bundler -aIx && gem install bundler -v 2.6.7
+
+      - name: Scan API for security vulnerabilities
+        run: bundle exec brakeman --no-pager

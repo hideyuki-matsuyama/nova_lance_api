@@ -1,4 +1,4 @@
-name: Build API
+name: Test
 
 on:
   pull_request:
@@ -6,42 +6,6 @@ on:
     branches: [main]
 
 jobs:
-  scan_api_security:
-    name: Scan API for security (Brakeman)
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: "3.4.4"
-          bundler-cache: true
-
-      - name: Reinstall Bundler
-        run: gem uninstall bundler -aIx && gem install bundler -v 2.6.7
-
-      - name: Scan API for security vulnerabilities
-        run: bundle exec brakeman --no-pager
-
-  lint_api:
-    name: Lint API (RuboCop)
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          # Ruby 3.4.x + Bundler 2.6.7 の組み合わせでCIエラーが発生するため、安定動作のために3.3.0を指定
-          ruby-version: "3.3.0"
-          bundler-cache: true
-
-      - name: Lint code for consistent style
-        run: bundle exec rubocop -f github
-
   test:
     runs-on: ubuntu-latest
     services:
@@ -67,7 +31,7 @@ jobs:
           working-directory: .
           bundler-cache: true
 
-      - name: Run tests
+      - name: Run tests (parallel)
         working-directory: .
         env:
           RAILS_ENV: test
@@ -76,4 +40,12 @@ jobs:
           SECRET_KEY_BASE: test_secret_key_base_for_github_actions
         run: |
           bundle exec rails db:prepare
-          bundle exec rspec
+          PARALLEL_COUNT=${GITHUB_RUNNER_CPU_COUNT:-2}
+          bundle exec parallel_rspec -n $PARALLEL_COUNT spec
+
+      - name: Upload coverage report
+        if: ${{ !env.ACT }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/

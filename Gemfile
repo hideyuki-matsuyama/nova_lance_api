@@ -66,6 +66,12 @@ group :development do
   # gem "annotate", git: "https://github.com/ctran/annotate_models.git"
 end
 
+group :test do
+  gem 'parallel_tests'
+  gem 'rspec_junit_formatter'
+  gem 'simplecov', require: false
+end
+
 gem 'jsonapi-serializer'
 
 # 認証

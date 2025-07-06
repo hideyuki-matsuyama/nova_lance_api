@@ -12,9 +12,13 @@ else
   ls -la /var/run/docker.sock
 fi
 
-# Install act
-echo "Installing act..."
-curl -s https://raw.githubusercontent.com/nektos/act/master/install.sh | bash
+# Install act (skip if already installed)
+if ! command -v act >/dev/null 2>&1; then
+  echo "Installing act..."
+  curl -s https://raw.githubusercontent.com/nektos/act/master/install.sh | bash
+else
+  echo "act already installed"
+fi
 
 # Setup scripts
 echo "Setting up scripts..."
