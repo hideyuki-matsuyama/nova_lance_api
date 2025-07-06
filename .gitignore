@@ -40,4 +40,6 @@
 # Ignore act binary
 /bin/act
 
-/coverage
+# Ignore coverage report files
+/coverage/**/*
+!/coverage/.keep
