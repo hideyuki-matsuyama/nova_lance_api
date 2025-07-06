@@ -1,0 +1,79 @@
+name: Build API
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  scan_api_security:
+    name: Scan API for security (Brakeman)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4.4"
+          bundler-cache: true
+
+      - name: Reinstall Bundler
+        run: gem uninstall bundler -aIx && gem install bundler -v 2.6.7
+
+      - name: Scan API for security vulnerabilities
+        run: bundle exec brakeman --no-pager
+
+  lint_api:
+    name: Lint API (RuboCop)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          # Ruby 3.4.x + Bundler 2.6.7 の組み合わせでCIエラーが発生するため、安定動作のために3.3.0を指定
+          ruby-version: "3.3.0"
+          bundler-cache: true
+
+      - name: Lint code for consistent style
+        run: bundle exec rubocop -f github
+
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5433:5432
+        options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - name: Install system packages
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libpq-dev
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby and cache gems for API
+        uses: ruby/setup-ruby@v1
+        with:
+          working-directory: .
+          bundler-cache: true
+
+      - name: Run tests
+        working-directory: .
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:password@localhost:5433/nova_lance_test
+          DEVISE_JWT_SECRET_KEY: test_jwt_secret_key_for_github_actions
+          SECRET_KEY_BASE: test_secret_key_base_for_github_actions
+        run: |
+          bundle exec rails db:prepare
+          bundle exec rspec

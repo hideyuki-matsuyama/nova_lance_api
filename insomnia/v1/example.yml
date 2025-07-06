@@ -1,0 +1,187 @@
+type: collection.insomnia.rest/5.0
+name: Example
+meta:
+  id: wrk_86f083e9ebb549a892464ef5088062d1
+  created: 1750235104275
+  modified: 1750235104275
+  description: ""
+collection:
+  - name: v1
+    meta:
+      id: fld_c6d6710428b644c78531c2e2883ef90c
+      created: 1750250403808
+      modified: 1750250403808
+      sortKey: -1750250403808
+      description: ""
+    children:
+      - url: "{{base_url}}/v1/examples"
+        name: 一覧
+        meta:
+          id: req_22085747ef5e4610903346c2c83a6c90
+          created: 1750235115661
+          modified: 1750250410909
+          isPrivate: false
+          description: ""
+          sortKey: -1750250410877
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+            id: pair_953dc29fa4a44e37a6cd11aafcd0ea14
+          - id: pair_4880efb004d24779918bf3e759d26436
+            name: Authorization
+            value: "{{jwt}}"
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{base_url}}/v1/examples"
+        name: 登録
+        meta:
+          id: req_ae656484bea543b3acd23ffdb65a7bd8
+          created: 1750236864095
+          modified: 1750250415084
+          isPrivate: false
+          description: ""
+          sortKey: -1750250410777
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"first_name": "お",
+            	"last_name": "ニュー"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+            id: pair_953dc29fa4a44e37a6cd11aafcd0ea14
+          - id: pair_4880efb004d24779918bf3e759d26436
+            name: Authorization
+            value: "{{jwt}}"
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{base_url}}/v1/examples/2"
+        name: 参照
+        meta:
+          id: req_0ff3efcc5fb04e5887f7bf519327a85f
+          created: 1750238572327
+          modified: 1750250421945
+          isPrivate: false
+          description: ""
+          sortKey: -1750250410677
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+            id: pair_953dc29fa4a44e37a6cd11aafcd0ea14
+          - id: pair_4880efb004d24779918bf3e759d26436
+            name: Authorization
+            value: "{{jwt}}"
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{base_url}}/v1/examples/2"
+        name: 更新
+        meta:
+          id: req_bf4e72b1ab1240bfa67e2cbb81f7945a
+          created: 1750238599935
+          modified: 1750253552490
+          isPrivate: false
+          description: ""
+          sortKey: -1750250410577
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"first_name": "こうしん",
+            	"last_name": "アップデートZ"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+            id: pair_953dc29fa4a44e37a6cd11aafcd0ea14
+          - id: pair_4880efb004d24779918bf3e759d26436
+            name: Authorization
+            value: "{{jwt}}"
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{base_url}}/v1/examples/23"
+        name: 削除
+        meta:
+          id: req_597cbb6b479f4772834209681db71c04
+          created: 1750238668976
+          modified: 1750253565323
+          isPrivate: false
+          description: ""
+          sortKey: -1750250410477
+        method: DELETE
+        body:
+          mimeType: application/json
+          text: ""
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+            id: pair_953dc29fa4a44e37a6cd11aafcd0ea14
+          - id: pair_4880efb004d24779918bf3e759d26436
+            name: Authorization
+            value: "{{jwt}}"
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_051655a2318a3ac6f2f901c0f3ccf4aa2a95c55d
+    created: 1750235104278
+    modified: 1750235104278
+environments:
+  name: Base Environment
+  meta:
+    id: env_051655a2318a3ac6f2f901c0f3ccf4aa2a95c55d
+    created: 1750235104277
+    modified: 1750235104277
+    isPrivate: false
