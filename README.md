@@ -12,6 +12,7 @@
 * VSCode の拡張機能 `GitHub Local Actions` が動作します
   - git push することなく手元で GitHub Workflows が実行可能です
   - ただし当該拡張機能においては、制約により`Artifacts` が作成されません
+    - ローカルで `bin/rspec` を実行する分には問題ありません
 * Postman の collection.json は conflict が激しくなるため、コレクションを個別に管理できる Insomnia を採用しましたが、以下の理由により再検討が必要です
   - Insomnia 現行バージョンのエクスポート形式（v5 / HAR）が Insomnia の CLI ツール（inso）非対応となっております
   - そのため GitHub Actions で自動テストに使えず、目論見を外した状態です
