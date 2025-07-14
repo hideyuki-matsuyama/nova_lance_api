@@ -47,7 +47,7 @@ group :development, :test do
   gem 'brakeman', require: false
 
   gem 'rspec-rails'
-  gem 'rubocop', '1.77.0', require: false
+  gem 'rubocop', '1.78.0', require: false
   gem 'rubocop-factory_bot', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
