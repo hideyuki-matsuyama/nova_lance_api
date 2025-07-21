@@ -17,7 +17,7 @@
 * Postman の collection.json は チーム開発で conflict が激しくなるため、コレクションを個別に管理できる Insomnia を採用しましたが、以下の理由により再検討が必要です
   - Insomnia 現行バージョンのエクスポート形式（v5 / HAR）が Insomnia の CLI ツール（inso）非対応となっております
   - そのため GitHub Actions で自動テストに使えず、目論見を外した状態です
-  - 仕方なく Postman で テストを回すようにしました
+  - 👉仕方なく Postman で テストを回すようにしました
 
 ## 起動方法
 
