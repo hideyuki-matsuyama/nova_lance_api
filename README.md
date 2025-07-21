@@ -3,6 +3,7 @@
 [![Test](https://github.com/hideyuki-matsuyama/nova_lance_api/actions/workflows/test.yml/badge.svg)](https://github.com/hideyuki-matsuyama/nova_lance_api/actions/workflows/test.yml)
 [![CodeQL](https://github.com/hideyuki-matsuyama/nova_lance_api/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/hideyuki-matsuyama/nova_lance_api/actions/workflows/github-code-scanning/codeql)
 [![Dependabot Updates](https://github.com/hideyuki-matsuyama/nova_lance_api/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/hideyuki-matsuyama/nova_lance_api/actions/workflows/dependabot/dependabot-updates)
+[![Postman API Tests](https://github.com/hideyuki-matsuyama/nova_lance_api/actions/workflows/postman.yml/badge.svg)](https://github.com/hideyuki-matsuyama/nova_lance_api/actions/workflows/postman.yml)
 
 # 🚧WIP
 
