@@ -31,4 +31,4 @@ rm -f tmp/pids/server.pid
 
 # Start Rails server
 echo "Starting Rails server..."
-exec bin/thrust bin/rails server -b 0.0.0.0 -p 3001
+exec bundle exec rdbg --open --port 1234 -- bin/thrust bin/rails server -b 0.0.0.0 -p 3001
