@@ -1,0 +1,78 @@
+name: Postman API Tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  postman-tests:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5433:5432
+        options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Set up database
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:password@localhost:5433/nova_lance_test
+        run: |
+          bundle exec rails db:create
+          bundle exec rails db:migrate
+          bundle exec rails db:seed
+
+      - name: Start Rails server
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:password@localhost:5433/nova_lance_test
+          DEVISE_JWT_SECRET_KEY: test_jwt_secret_key_for_github_actions
+          SECRET_KEY_BASE: test_secret_key_base_for_github_actions
+        run: |
+          bundle exec rails server -p 3002 &
+          sleep 10
+
+      - name: Install Newman
+        run: npm install -g newman
+
+      - name: Run Postman tests
+        run: |
+          newman run postman/nova_lance_api.postman_collection.json \
+            -e postman/nova_lance_api.postman_environment.json \
+            --env-var "base_url=http://localhost:3002" \
+            --reporters cli,junit \
+            --reporter-junit-export postman-results.xml
+
+      - name: Upload test results
+        if: always() && github.event_name != 'act_local'
+        uses: actions/upload-artifact@v4
+        with:
+          name: postman-test-results
+          path: postman-results.xml
+
+      - name: Show test results (local)
+        if: always()
+        run: |
+          if [ -f postman-results.xml ]; then
+            echo "Test results generated successfully"
+            cat postman-results.xml
+          else
+            echo "No test results file found"
+          fi
