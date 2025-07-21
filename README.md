@@ -17,8 +17,16 @@
   - Insomnia 現行バージョンのエクスポート形式（v5 / HAR）が Insomnia の CLI ツール（inso）非対応となっております
   - そのため GitHub Actions で自動テストに使えず、目論見を外した状態です
 
-## デバッグ方法
+## 起動方法
 
-1. VSCode で F5 キーを押してデバッグコンソールを有効にしてください
+1. ```sh
+   docker compose build
+   docker compose up -d
+   ```
+2. (VSCode)ウィンドウ左下角のアイコンをクリック → 実行中のコンテナにアタッチ → /nova_lance_api 
+
+## デバッグ方法(VSCode)
+
+1. F5 キーでデバッグコンソールを有効にしてください
 2. ブレークしたいコードに `debugger` を仕込んでください
 <img width="1712" height="987" alt="image" src="https://github.com/user-attachments/assets/b3536f04-65c4-4bb0-8bc4-464a32215071" />
