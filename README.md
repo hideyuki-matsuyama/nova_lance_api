@@ -16,3 +16,9 @@
 * Postman の collection.json は チーム開発で conflict が激しくなるため、コレクションを個別に管理できる Insomnia を採用しましたが、以下の理由により再検討が必要です
   - Insomnia 現行バージョンのエクスポート形式（v5 / HAR）が Insomnia の CLI ツール（inso）非対応となっております
   - そのため GitHub Actions で自動テストに使えず、目論見を外した状態です
+
+## デバッグ方法
+
+1. VSCode で F5 キーを押してデバッグコンソールを有効にしてください
+2. ブレークしたいコードに `debugger` を仕込んでください
+<img width="1712" height="987" alt="image" src="https://github.com/user-attachments/assets/b3536f04-65c4-4bb0-8bc4-464a32215071" />
