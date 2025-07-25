@@ -8,7 +8,7 @@
 # 🚧WIP
 
 * 仮想プロダクトの Rails API アプリケーションです
-* テスト実行時に C0 カバレッジを計測しています
+* テスト実行時に C1 カバレッジを計測しています
   - `Test` workflow の実行結果にある `Artifacts` からダウンロードして参照できます
 * VSCode の拡張機能 `GitHub Local Actions` が動作します
   - git push することなく手元で GitHub Workflows が実行可能です
