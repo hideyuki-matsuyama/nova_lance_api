@@ -70,6 +70,7 @@ group :test do
   gem 'parallel_tests'
   gem 'rspec_junit_formatter'
   gem 'simplecov', require: false
+  gem 'simplecov-lcov', require: false
 end
 
 gem 'jsonapi-serializer'
