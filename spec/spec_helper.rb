@@ -11,6 +11,7 @@ end
 
 SimpleCov.start do
   enable_coverage :branch
+  primary_coverage :branch
   formatter SimpleCov::Formatter::MultiFormatter.new([
                                                        SimpleCov::Formatter::LcovFormatter,
                                                        SimpleCov::Formatter::HTMLFormatter
