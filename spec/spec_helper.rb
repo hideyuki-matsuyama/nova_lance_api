@@ -12,8 +12,8 @@ end
 SimpleCov.start do
   enable_coverage :branch
   formatter SimpleCov::Formatter::MultiFormatter.new([
-                                                       SimpleCov::Formatter::LcovFormatter, # Add Lcov as an output when generating code coverage report
-                                                       SimpleCov::Formatter::HTMLFormatter # Add other outputs for the code coverage report
+                                                       SimpleCov::Formatter::LcovFormatter,
+                                                       SimpleCov::Formatter::HTMLFormatter
                                                      ])
 end
 
