@@ -317,7 +317,7 @@ Devise.setup do |config| # rubocop:disable Metrics/BlockLength
     jwt.algorithm = 'HS256'
 
     # アプリケーションの秘密鍵。credentialsから読み込むのが安全
-    jwt.secret = if Rails.env.test? || Rails.env.development?
+    jwt.secret = if Rails.env.local?
                    ENV['DEVISE_JWT_SECRET_KEY'] || Rails.application.credentials.devise_jwt_secret_key
                  else
                    Rails.application.credentials.devise_jwt_secret_key!
