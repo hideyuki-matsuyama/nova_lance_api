@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   namespace :v1 do
     post 'login', to: 'authentications#create'
     resources :examples
+    resources :hello, only: [:index]
   end
 end
